@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String?
+  image     String?
+  role      Role     @default(USER)
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  purchases Purchase[]
+  reviews   Review[]
+
+  @@map("users")
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  longDescription String?
+  category    Category
+  price       Float    @default(0)
+  tier        Plan     @default(FREE)
+  previewUrl  String?
+  imageUrl    String
+  techStack   String[]
+  rating      Float    @default(0)
+  ratingCount Int      @default(0)
+  downloads   Int      @default(0)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  purchases Purchase[]
+  reviews   Review[]
+
+  @@map("portfolios")
+}
+
+model Purchase {
+  id              String   @id @default(cuid())
+  userId          String
+  portfolioId     String
+  stripeSessionId String?  @unique
+  amount          Float
+  createdAt       DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("purchases")
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  userId      String
+  portfolioId String
+  rating      Int
+  comment     String
+  createdAt   DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Plan {
+  FREE
+  PRO
+  AGENCY
+}
+
+enum Category {
+  FULL_STACK
+  WEB_DEVELOPER
+  UI_UX_DESIGNER
+  DATA_SCIENTIST
+}

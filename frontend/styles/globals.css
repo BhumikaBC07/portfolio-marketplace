@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #f9f5ef;
+  --color-surface: #f0ebe0;
+  --color-navbar: #f5f0e8;
+  --color-border: #d8d0c4;
+  --color-text-primary: #1a0f08;
+  --color-text-muted: #6a5a4a;
+  --color-espresso: #2c1810;
+  --color-taupe: #8a7a6a;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    color: var(--color-text-primary);
+  }
+
+  ::selection {
+    background-color: var(--color-espresso);
+    color: var(--color-bg);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-taupe);
+  }
+}
+
+@layer components {
+  .btn-espresso {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-espresso-500 text-ivory-100 font-medium text-sm tracking-wide transition-all duration-200 hover:bg-espresso-400 active:scale-95;
+    border-radius: 2px;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-espresso-500 text-espresso-500 font-medium text-sm tracking-wide transition-all duration-200 hover:bg-espresso-500 hover:text-ivory-100 active:scale-95;
+    border-radius: 2px;
+  }
+
+  .btn-taupe {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-taupe-500 text-ivory-100 font-medium text-sm tracking-wide transition-all duration-200 hover:bg-taupe-600 active:scale-95;
+    border-radius: 2px;
+  }
+
+  .card-editorial {
+    @apply bg-ivory-100 border border-ivory-400 transition-all duration-300 hover:shadow-editorial-lg hover:-translate-y-0.5;
+  }
+
+  .tag {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-medium tracking-wide bg-ivory-200 text-taupe-600 border border-ivory-400;
+    border-radius: 2px;
+  }
+
+  .tag-espresso {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-medium tracking-wide bg-espresso-500 text-ivory-100;
+    border-radius: 2px;
+  }
+
+  .section-title {
+    @apply font-serif text-display-sm text-ink;
+  }
+
+  .editorial-line {
+    @apply border-t border-ivory-400;
+  }
+
+  .input-editorial {
+    @apply w-full px-4 py-3 bg-ivory-100 border border-ivory-400 text-ink placeholder:text-ink-light focus:outline-none focus:border-espresso-500 transition-colors duration-200 text-sm;
+    border-radius: 2px;
+  }
+
+  .nav-link {
+    @apply text-sm text-taupe-600 hover:text-ink transition-colors duration-200 relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-espresso-500 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-ivory-300;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+}
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f0ebe0 25%, #e6ddd0 50%, #f0ebe0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Footer link hover on dark background */
+.footer-link {
+  color: #9a8878;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #f9f5ef;
+}
+.react-hot-toast {
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 2px !important;
+}
