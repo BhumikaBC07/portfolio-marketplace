@@ -14,11 +14,11 @@
 
 ## Live Demo
 
-> ![PortfolioHub Demo][
+> ![PortfolioHub Demo]
 
 https://github.com/user-attachments/assets/4783f24c-74c8-4fd1-a1cf-bdaf335d4586
 
-]
+
 
 🌐 **Production:** [portfolio-marketplace-tan.vercel.app](https://portfolio-marketplace-tan.vercel.app)  
 
